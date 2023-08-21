@@ -1,0 +1,26 @@
+name: Push Artifacts
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+#    secrets:
+#      ftp-host:
+#        required: true
+#      ftp-user:
+#        required: true
+#      ftp-pass:
+#        required: true
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ github.event.inputs.name }}
+
+      - name: Debug
+        run: ls -R
