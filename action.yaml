@@ -3,15 +3,15 @@ description: "Push Artifacts Test"
 author: "Shane"
 
 inputs:
-  name:
-    description: Artifact Name
+  path:
+    description: "Artifact Path"
     required: true
 
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.name}}
+    - ${{ inputs.path}}
 
 #  steps:
 #    - uses: actions/download-artifact@v3

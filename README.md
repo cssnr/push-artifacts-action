@@ -5,13 +5,23 @@
 Push Artifacts to SFTP Server.
 
 ```yaml
+name: "Test"
+
+on:
+  push:
+
 jobs:
-  push-artifacts:
-    - name: "Push Artifacts"
-      uses: hosted-domains/workflows/.github/workflows/action.yaml@master
-      with:
-        name: artifacts
-        ftp-host: ${{ secrets.FTP_HOST }}
-        ftp-user: ${{ secrets.FTP_USER }}
-        ftp-pass: ${{ secrets.FTP_PASS }}
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Push Artifacts"
+        uses: hosted-domains/gh-push-artifacts@master
+        with:
+          path: "artifacts"
 ```
