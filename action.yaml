@@ -10,12 +10,5 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  args:
-    - ${{ inputs.path}}
-
-#  steps:
-#    - uses: actions/download-artifact@v3
-#      with:
-#        name: ${{ github.event.inputs.name }}
-#    - run: ls -R
-#      shell: /bin/bash
+#  args:
+#    - ${{ inputs.path}}
