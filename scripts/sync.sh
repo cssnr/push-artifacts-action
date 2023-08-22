@@ -35,7 +35,7 @@ echo "Sending Discord Webhook"
 URL="${INPUT_WEBHOST}/${REPO_RUN_PATH}"
 echo "URL: ${URL}"
 
-_description="Testing"
+_description="**${GITHUB_REPOSITORY}**\nNew Artifacts Pushed =)\n[${URL}](${URL})"
 #_description="""
 #**${GITHUB_REPOSITORY}**
 #New Artifacts Pushed =)
