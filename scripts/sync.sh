@@ -41,7 +41,7 @@ New Artifacts Pushed =)
 [${URL}](${URL})
 """
 
-bash discord.sh \
+bash scripts/discord.sh \
   --webhook-url="${INPUT_WEBHOOK}" \
   --username "ArtifactPush" \
   --avatar "https://i.imgur.com/12jyR5Q.png" \
