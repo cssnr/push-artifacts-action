@@ -13,14 +13,15 @@ echo "INPUT_PORT: ${INPUT_PORT}"
 echo "INPUT_BASE: ${INPUT_BASE}"
 
 REPO_RUN_PATH="${GITHUB_REPOSITORY}/${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}"
-
 echo "REPO_RUN_PATH: ${REPO_RUN_PATH}"
 
 mkdir -p "${GITHUB_REPOSITORY}"
 mv "${INPUT_PATH}" "${REPO_RUN_PATH}"
 
-ls -lAhR "${REPO_RUN_PATH}"
+echo "SOURCE: ${GITHUB_REPOSITORY}"
+ls -lAhR "${GITHUB_REPOSITORY}"
+echo "TARGET: ${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}/${REPO_RUN_PATH}"
 
 sshpass -p "${INPUT_PASS}" \
-scp -P "${INPUT_PORT}" -o StrictHostKeyChecking=no -r \
-    "${REPO_RUN_PATH}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}/${REPO_RUN_PATH}"
+rsync -aPvh -e "ssh -p ${INPUT_PORT} -o StrictHostKeyChecking=no" \
+    "${GITHUB_REPOSITORY}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}/${REPO_RUN_PATH}"
