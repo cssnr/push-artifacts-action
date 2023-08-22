@@ -32,7 +32,7 @@ rsync -aPvh -e "ssh -p ${INPUT_PORT} -o StrictHostKeyChecking=no" \
 if [ -n "${INPUT_WEBHOOK}" ];then
 echo "Sending Discord Webhook"
 
-URL="${INPUT_WEBHOST}/${REPO_RUN_PATH}"
+URL="${INPUT_WEBHOST}/${REPO_RUN_PATH}/"
 echo "URL: ${URL}"
 
 _description="**${GITHUB_REPOSITORY}**\nNew Artifacts Pushed =)\n[${URL}](${URL})"
