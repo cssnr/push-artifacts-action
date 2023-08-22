@@ -27,9 +27,9 @@ sshpass -p "${INPUT_PASS}" \
 rsync -aPvh -e "ssh -p ${INPUT_PORT} -o StrictHostKeyChecking=no" \
     "${GITHUB_REPOSITORY_OWNER}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}"
 
-if [ -n "${WEBHOOK}" ];then
+if [ -n "${INPUT_WEBHOOK}" ];then
 
-URL="${WEBHOST}/${REPO_RUN_PATH}"
+URL="${INPUT_WEBHOST}/${REPO_RUN_PATH}"
 
 _description="""
 **${GITHUB_REPOSITORY}**
@@ -38,7 +38,7 @@ New Artifacts Pushed =)
 """
 
 bash discord.sh \
-  --webhook-url="${WEBHOOK}" \
+  --webhook-url="${INPUT_WEBHOOK}" \
   --username "ArtifactPush" \
   --avatar "https://i.imgur.com/12jyR5Q.png" \
   --text "${URL}" \
@@ -49,4 +49,5 @@ bash discord.sh \
   --author "${GITHUB_ACTOR}" \
   --author-url "https://github.com/${GITHUB_REPOSITORY}" \
   --timestamp
+
 fi

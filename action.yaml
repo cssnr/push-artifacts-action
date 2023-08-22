@@ -19,9 +19,11 @@ inputs:
     description: "SFTP Port"
     default: "22"
     required: false
-  base:
-    description: "SFTP Base Directory"
-    default: "static"
+  webhost:
+    description: "Remote Web Host Address"
+    required: false
+  webhook:
+    description: "Discord Webhook"
     required: false
 
 runs:
