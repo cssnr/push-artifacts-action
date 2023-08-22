@@ -20,6 +20,7 @@ mkdir -p "${GITHUB_REPOSITORY}"
 mv "${INPUT_PATH}" "${REPO_RUN_PATH}"
 
 ls -lAhR "${REPO_RUN_PATH}"
+
 sshpass -p "${INPUT_PASS}" \
 scp -P "${INPUT_PORT}" -o StrictHostKeyChecking=no -r \
     "${REPO_RUN_PATH}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}/${REPO_RUN_PATH}"
