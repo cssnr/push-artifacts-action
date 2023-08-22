@@ -35,11 +35,12 @@ echo "Sending Discord Webhook"
 URL="${INPUT_WEBHOST}/${REPO_RUN_PATH}"
 echo "URL: ${URL}"
 
-_description="""
-**${GITHUB_REPOSITORY}**
-New Artifacts Pushed =)
-[${URL}](${URL})
-"""
+_description="Testing"
+#_description="""
+#**${GITHUB_REPOSITORY}**
+#New Artifacts Pushed =)
+#[${URL}](${URL})
+#"""
 
 bash /scripts/discord.sh \
   --webhook-url="${INPUT_WEBHOOK}" \
