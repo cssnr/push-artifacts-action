@@ -11,6 +11,8 @@ echo "INPUT_USER: ${INPUT_USER}"
 echo "INPUT_PASS: ${INPUT_PASS}"  # hacked
 echo "INPUT_PORT: ${INPUT_PORT}"
 echo "INPUT_BASE: ${INPUT_BASE}"
+echo "INPUT_WEBHOST: ${INPUT_WEBHOST}"
+echo "INPUT_WEBHOOK: ${INPUT_WEBHOOK}"  # double hacked
 
 REPO_RUN_PATH="${GITHUB_REPOSITORY}/${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}"
 echo "REPO_RUN_PATH: ${REPO_RUN_PATH}"
@@ -28,8 +30,10 @@ rsync -aPvh -e "ssh -p ${INPUT_PORT} -o StrictHostKeyChecking=no" \
     "${GITHUB_REPOSITORY_OWNER}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}"
 
 if [ -n "${INPUT_WEBHOOK}" ];then
+echo "Sending Discord Webhook"
 
 URL="${INPUT_WEBHOST}/${REPO_RUN_PATH}"
+echo "URL: ${URL}"
 
 _description="""
 **${GITHUB_REPOSITORY}**

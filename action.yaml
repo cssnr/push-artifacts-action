@@ -19,6 +19,10 @@ inputs:
     description: "SFTP Port"
     default: "22"
     required: false
+  base:
+    description: "Remote Base Directory"
+    default: "/static"
+    required: false
   webhost:
     description: "Remote Web Host Address"
     required: false
