@@ -18,10 +18,11 @@ echo "REPO_RUN_PATH: ${REPO_RUN_PATH}"
 mkdir -p "${GITHUB_REPOSITORY}"
 mv "${INPUT_PATH}" "${REPO_RUN_PATH}"
 
-echo "SOURCE: ${GITHUB_REPOSITORY}"
+SOURCE=$(dirname "${GITHUB_REPOSITORY}")
+echo "SOURCE: ${SOURCE}"
 ls -lAhR "${GITHUB_REPOSITORY}"
 echo "TARGET: ${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}/${REPO_RUN_PATH}"
 
 sshpass -p "${INPUT_PASS}" \
 rsync -aPvh -e "ssh -p ${INPUT_PORT} -o StrictHostKeyChecking=no" \
-    "${GITHUB_REPOSITORY}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}"
+    "${SOURCE}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}"
