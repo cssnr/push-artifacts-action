@@ -1,5 +1,6 @@
-name: Push Artifacts
+name: "Push Artifacts"
 description: "Push Artifacts Test"
+author: "Shane"
 
 inputs:
   name:
@@ -7,10 +8,14 @@ inputs:
     required: true
 
 runs:
-  using: "composite"
-  steps:
-    - uses: actions/download-artifact@v3
-      with:
-        name: ${{ github.event.inputs.name }}
-    - run: ls -R
-      shell: /bin/bash
+  using: "docker"
+  image: "ubuntu"
+  args:
+    - ${{ inputs.name}}
+
+#  steps:
+#    - uses: actions/download-artifact@v3
+#      with:
+#        name: ${{ github.event.inputs.name }}
+#    - run: ls -R
+#      shell: /bin/bash
