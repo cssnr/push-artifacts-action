@@ -6,6 +6,23 @@ inputs:
   path:
     description: "Artifact Path"
     required: true
+  host:
+    description: "SFTP Host"
+    required: true
+  user:
+    description: "SFTP User"
+    required: true
+  pass:
+    description: "SFTP Pass"
+    required: true
+  port:
+    description: "SFTP Port"
+    default: "22"
+    required: false
+  base:
+    description: "SFTP Base Directory"
+    default: "static"
+    required: false
 
 runs:
   using: "docker"

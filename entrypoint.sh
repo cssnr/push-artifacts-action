@@ -10,3 +10,6 @@ echo "Starting: Push Artifacts"
 echo "INPUT_PATH: ${INPUT_PATH}"
 
 ls -lAhR "${INPUT_PATH}"
+
+echo "Running: sync.sh"
+bash /scripts/sync.sh

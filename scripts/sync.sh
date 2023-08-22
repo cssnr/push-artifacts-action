@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#set -e
+
+echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+
+echo "INPUT_HOST: ${INPUT_HOST}"
+echo "INPUT_USER: ${INPUT_USER}"
+echo "INPUT_PASS: ${INPUT_PASS}"
+echo "INPUT_PORT: ${INPUT_PORT}"
+echo "INPUT_BASE: ${INPUT_BASE}"
