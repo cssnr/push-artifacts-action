@@ -24,4 +24,4 @@ echo "TARGET: ${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}/${REPO_RUN_PATH}"
 
 sshpass -p "${INPUT_PASS}" \
 rsync -aPvh -e "ssh -p ${INPUT_PORT} -o StrictHostKeyChecking=no" \
-    "${GITHUB_REPOSITORY}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}/${REPO_RUN_PATH}"
+    "${GITHUB_REPOSITORY}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_BASE}"
