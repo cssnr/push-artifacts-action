@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#set -e
+set -e
 
 echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
 echo "GITHUB_RUN_NUMBER: ${GITHUB_RUN_NUMBER}"
