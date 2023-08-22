@@ -35,20 +35,18 @@ echo "Sending Discord Webhook"
 URL="${INPUT_WEBHOST}/${REPO_RUN_PATH}/"
 echo "URL: ${URL}"
 
-_description="**${GITHUB_REPOSITORY}**\n- New Artifacts Pushed =)\n- Served Fresh"
-
+echo "Running: discord.sh"
 bash /scripts/discord.sh \
   --webhook-url="${INPUT_WEBHOOK}" \
   --username "ArtifactPush" \
   --avatar "https://avatars.githubusercontent.com/u/84293894?s=200&v=4" \
   --text "https://github.com/${GITHUB_ACTOR}\n${URL}" \
   --title "New Artifacts Pushed" \
-  --description "${_description}" \
+  --description "**${GITHUB_REPOSITORY}**\n- New Artifacts Pushed =)\n- Served Fresh" \
   --color "0xFFFFFF" \
   --url "${URL}" \
   --author "${GITHUB_ACTOR}" \
   --author-url "https://github.com/${GITHUB_ACTOR}" \
   --thumbnail "https://avatars.githubusercontent.com/u/84293894?s=200&v=4" \
   --timestamp
-
 fi
