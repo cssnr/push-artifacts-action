@@ -26,6 +26,7 @@ echo "REPO_RUN_PATH: ${REPO_RUN_PATH}"
 mkdir -p "${GITHUB_REPOSITORY}"
 mv "${INPUT_PATH}" "${REPO_RUN_PATH}"
 
+echo "Generating Template: index.html"
 python /scripts/gen_index.py "${REPO_RUN_PATH}" "${GITHUB_REPOSITORY}"
 
 #SOURCE=$(dirname "${GITHUB_REPOSITORY}")
