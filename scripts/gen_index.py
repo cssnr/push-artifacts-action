@@ -30,7 +30,7 @@ if __name__ == '__main__':
     }
     env = Environment(loader=FileSystemLoader('/templates'))
     template = env.get_template('index.jinja2.html')
-    rendered = template.render({'data': data})
+    rendered = template.render(data)
     with open(target_path / f'index.html', 'w', encoding='utf-8', newline='\n') as f:
         f.write(rendered)
         print(f'Generated: {f.name}')
