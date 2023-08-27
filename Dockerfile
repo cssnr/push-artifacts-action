@@ -1,4 +1,4 @@
-FROM python3.11-alpine
+FROM python:3.11-alpine
 
 RUN apk add --update --no-cache bash curl jq openssh rsync sshpass
 COPY requirements.txt requirements.txt
