@@ -1,6 +1,6 @@
-# Workflows
+# Push Artifacts Action
 
-This is really just a POC...
+This is really just a POC, but it does something...
 
 ## Push Artifacts
 
@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: "Push Artifacts"
-        uses: hosted-domains/gh-push-artifacts@master
+        uses: hosted-domains/push-artifacts-action@master
         with:
           path: "build/artifacts"
           host: ${{ secrets.RSYNC_HOST }}
