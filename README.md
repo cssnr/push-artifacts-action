@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: "Push Artifacts"
-        uses: hosted-domains/push-artifacts-action@master
+        uses: cssnr/push-artifacts-action@master
         with:
           path: "build/artifacts"
           host: ${{ secrets.RSYNC_HOST }}
