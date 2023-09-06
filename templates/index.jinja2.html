@@ -9,36 +9,12 @@
     <style>
         html,
         body {
-            position: relative;
-            height: 100%;
-        }
-        body {
-            background: #343432;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
-            color: #000;
             margin: 0;
             padding: 0;
-        }
-        .swiper {
-            width: 100%;
+            position: relative;
             height: 100%;
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #343432;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .swiper-slide img {
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-        }
-        body {
             background: #111;
             color: #111;
         }
@@ -49,8 +25,19 @@
             margin-right: auto;
         }
         .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-size: cover;
-            background-position: center;
+            background: #343432 center;
+        }
+        .swiper-slide img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
         }
         .mySwiper2 {
             height: 80%;
@@ -98,16 +85,21 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
     var swiper = new Swiper(".mySwiper", {
-        spaceBetween: 10,
-        slidesPerView: 5,
         freeMode: true,
+        grabCursor: true,
+        loop: true,
+        mousewheel: true,
+        slidesPerView: 5,
+        spaceBetween: 10,
         watchSlidesProgress: true,
     });
     var swiper2 = new Swiper(".mySwiper2", {
-        spaceBetween: 10,
-        mousewheel: true,
         grabCursor: true,
+        effect: 'fade',
         loop: true,
+        mousewheel: true,
+        spaceBetween: 10,
+        zoom: true,
         keyboard: {
             enabled: true,
         },

@@ -49,9 +49,9 @@ bash /scripts/discord.sh \
   --webhook-url="${INPUT_WEBHOOK}" \
   --username "ArtifactPush" \
   --avatar "https://avatars.githubusercontent.com/u/84293894?s=200&v=4" \
-  --text "https://github.com/${GITHUB_ACTOR}\n${URL}" \
+  --text "${URL}\n<https://github.com/${GITHUB_REPOSITORY}>" \
   --title "New Artifacts Pushed" \
-  --description "**${GITHUB_REPOSITORY}**\n- ${GITHUB_REF_NAME}\n- Served Fresh" \
+  --description "**${GITHUB_REPOSITORY}**\n- ${GITHUB_REF_NAME}\n- ${GITHUB_HEAD_REF}" \
   --color "0xFFFFFF" \
   --url "${URL}" \
   --author "${GITHUB_ACTOR}" \
