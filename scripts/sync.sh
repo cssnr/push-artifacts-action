@@ -51,7 +51,7 @@ bash /scripts/discord.sh \
   --avatar "https://avatars.githubusercontent.com/u/84293894?s=200&v=4" \
   --text "${URL}\n<https://github.com/${GITHUB_REPOSITORY}>" \
   --title "New Artifacts Pushed" \
-  --description "**${GITHUB_REPOSITORY}**\n- ${GITHUB_REF_NAME}\n- ${GITHUB_HEAD_REF}" \
+  --description "**${GITHUB_REPOSITORY}**\n- ${GITHUB_REF_NAME:-None}\n- ${GITHUB_HEAD_REF:-None}" \
   --color "0xFFFFFF" \
   --url "${URL}" \
   --author "${GITHUB_ACTOR}" \
