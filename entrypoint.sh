@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-#set -e
 
-echo "Starting: Push Artifacts"
+set -e
 
-#echo "0: ${0}"
-#echo "1: ${1}"
-#echo "2: ${2}"
+echo "Starting: ${0}  pwd: $(pwd)"
 
-echo "Running: sync.sh"
-bash /scripts/sync.sh
+echo "bash /scripts/run.sh"
+bash /scripts/run.sh

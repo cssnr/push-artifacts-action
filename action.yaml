@@ -1,37 +1,41 @@
 name: "Push Artifacts"
 description: "Push Artifacts Test"
 author: "Shane"
+branding:
+  icon: "image"
+  color: "blue"
 
 inputs:
-  path:
-    description: "Artifact Path"
+  source:
+    description: "Source Directory"
     required: true
+  dest:
+    description: "Remote Base Directory"
+    required: false
+    default: "/static"
   host:
-    description: "SFTP Host"
+    description: "RSYNC Host"
     required: true
   user:
-    description: "SFTP User"
+    description: "RSYNC User"
     required: true
   pass:
-    description: "SFTP Pass"
+    description: "RSYNC Pass"
     required: true
   port:
-    description: "SFTP Port"
+    description: "RSYNC Port"
+    required: false
     default: "22"
-    required: false
-  base:
-    description: "Remote Base Directory"
-    default: "/static"
-    required: false
   webhost:
     description: "Remote Web Host Address"
     required: false
   webhook:
     description: "Discord Webhook"
     required: false
+  token:
+    description: "GitHub Token"
+    required: false
 
 runs:
   using: "docker"
   image: "Dockerfile"
-#  args:
-#    - ${{ inputs.path}}
