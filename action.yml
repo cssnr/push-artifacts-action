@@ -9,10 +9,16 @@ inputs:
   source:
     description: "Source Directory"
     required: true
+  path:
+    description: "Backwards Compatibility ONLY! Use: source"
+    required: false
   dest:
     description: "Remote Base Directory"
     required: false
     default: "/static"
+  base:
+    description: "Backwards Compatibility ONLY! Use: dest"
+    required: false
   host:
     description: "RSYNC Host"
     required: true

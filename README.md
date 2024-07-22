@@ -6,7 +6,9 @@
 
 # Push Artifacts Action
 
-This is really just a POC! but it does something...
+This is really just a POC, but works and is in use. While it does rsync artifacts to a remote host, it is designed for
+screenshots because it creates a [swiper.js](https://github.com/nolimits4web/swiper) index.html with all the files
+synced and if served from a web server can be viewed in the browser.
 
 Will rsync the `source` (directory in the build) to `host`@`user` with `pass` on `port` to `dest` remote directory and
 append the `GITHUB_REPOSITORY` (org/repo) followed by `GITHUB_RUN_NUMBER` then `GITHUB_RUN_ATTEMPT` and optionally send
@@ -17,6 +19,9 @@ a notification to a Discord `webhook` or comment on the PR prepending the `webho
 * [Support](#Support)
 * [Contributing](#Contributing)
 
+> [!WARNING]  
+> This action and this GitHub repository will soon be renamed before `v1.0.0` is published.
+
 ## Inputs
 
 | input   | required | default   | description                   |
@@ -24,14 +29,14 @@ a notification to a Discord `webhook` or comment on the PR prepending the `webho
 | source  | **Yes**  | -         | Source Directory              |
 | dest    | No       | `/static` | Destination Directory *       |
 | host    | **Yes**  | -         | RSYNC Host                    |
-| user    | **Yes**  | -         | RSYNC Host                    |
-| pass    | **Yes**  | -         | RSYNC Host                    |
-| port    | No       | `22`      | RSYNC Host                    |
+| user    | **Yes**  | -         | RSYNC User                    |
+| pass    | **Yes**  | -         | RSYNC Pass                    |
+| port    | No       | `22`      | RSYNC Port                    |
 | webhost | No       | -         | HTTP Web Host for URL *       |
 | webhook | No       | -         | Discord Webhook *             |
 | token   | No       | -         | `${{ secrets.GITHUB_TOKEN }}` |
 
-**dest** - Remote destination directory should be the root of your web directory.
+**dest** - Remote destination directory that should be the root of your web server directory.
 The full remote path will be {dest}/{owner}/{repo}/{run#}
 
 **webhost** - Web host where the `dest` is available at. The full URL will be {webhost}/{owner}/{repo}/{run#}
@@ -57,7 +62,7 @@ For full details see: [scripts/run.sh](scripts%2Frun.sh)
       token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### Examples
+## Examples
 
 ```yaml
 name: "Push Artifacts Test"
@@ -94,6 +99,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+To see this used in actual workflows, check out these examples:  
+https://github.com/django-files/django-files/blob/master/.github/workflows/test.yaml  
+https://github.com/cssnr/link-extractor/blob/master/.github/workflows/test.yaml
+
 # Support
 
 For general help or to request a feature, see:
@@ -112,7 +121,7 @@ If you are experiencing an issue/bug or getting unexpected results, you can:
 
 Currently, the best way to contribute to this project is to star this project on GitHub.
 
-Additionally, you can support other GitHub Actions I have created:
+Additionally, you can support other GitHub Actions I have published:
 
 - [VirusTotal Action](https://github.com/cssnr/virustotal-action)
 - [Update Version Tags Action](https://github.com/cssnr/update-version-tags-action)
