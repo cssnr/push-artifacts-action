@@ -1,0 +1,47 @@
+name: "Push Artifacts"
+description: "Push Artifacts Test"
+author: "Shane"
+branding:
+  icon: "image"
+  color: "blue"
+
+inputs:
+  source:
+    description: "Source Directory"
+    required: true
+  path:
+    description: "Backwards Compatibility ONLY! Use: source"
+    required: false
+  dest:
+    description: "Remote Base Directory"
+    required: false
+    default: "/static"
+  base:
+    description: "Backwards Compatibility ONLY! Use: dest"
+    required: false
+  host:
+    description: "RSYNC Host"
+    required: true
+  user:
+    description: "RSYNC User"
+    required: true
+  pass:
+    description: "RSYNC Pass"
+    required: true
+  port:
+    description: "RSYNC Port"
+    required: false
+    default: "22"
+  webhost:
+    description: "Remote Web Host Address"
+    required: false
+  webhook:
+    description: "Discord Webhook"
+    required: false
+  token:
+    description: "GitHub Token"
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
