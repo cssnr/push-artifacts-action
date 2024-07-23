@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Running: ${0} pwd: $(pwd)"
+echo "Running: ${0} as: $(whoami) in: $(pwd)"
 
 echo "---------- GITHUB ----------"
 
@@ -42,8 +42,7 @@ echo "Running: /src/generate.py"
 python /src/generate.py "${REPO_RUN_PATH}" "${GITHUB_REPOSITORY}"
 
 echo "Listing Source Directory: ${GITHUB_REPOSITORY_OWNER}"
-#ls -lAhR "${GITHUB_REPOSITORY_OWNER}"
-tree "${GITHUB_REPOSITORY_OWNER}"
+ls -lAhR "${GITHUB_REPOSITORY_OWNER}"
 
 echo "rsync from: ${GITHUB_REPOSITORY_OWNER} to: ${INPUT_USER}@${INPUT_HOST}:${INPUT_DEST}"
 sshpass -p "${INPUT_PASS}" \
@@ -69,6 +68,7 @@ fi
 if [ -n "${PR_NUMBER}" ] && [ -n "${GH_TOKEN}" ];then
     echo -e "\u001b[34;1mCommenting on PR: ${PR_NUMBER}"
     echo -e "Screen Shots Link: ${MD_URL}\n${MD_REFS}" > /tmp/body
+    git config --global --add safe.directory "${GITHUB_WORKSPACE}"
     gh pr comment "${PR_NUMBER}" --body-file /tmp/body
 else
     echo -e "\u001b[33;1mSkipping PR comment because not PR or no token"
