@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Running: ${0} pwd: $(pwd)"
+echo "Running: ${0} as: $(whoami) in: $(pwd)"
 
 echo "---------- GITHUB ----------"
 
@@ -43,7 +43,6 @@ python /src/generate.py "${REPO_RUN_PATH}" "${GITHUB_REPOSITORY}"
 
 echo "Listing Source Directory: ${GITHUB_REPOSITORY_OWNER}"
 ls -lAhR "${GITHUB_REPOSITORY_OWNER}"
-#tree "${GITHUB_REPOSITORY_OWNER}"
 
 echo "rsync from: ${GITHUB_REPOSITORY_OWNER} to: ${INPUT_USER}@${INPUT_HOST}:${INPUT_DEST}"
 sshpass -p "${INPUT_PASS}" \
