@@ -21,6 +21,8 @@ jobs:
         with:
           scandir: src
           ignore_names: discord.sh
+        env:
+          SHELLCHECK_OPTS: -e SC2153
 
       - name: "Prettier"
         if: ${{ always() }}
