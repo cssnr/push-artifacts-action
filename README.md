@@ -38,6 +38,7 @@ a notification to a Discord `webhook` or comment on the PR prepending the `webho
 | port    |    -     | `22`      | RSYNC Port               |
 | webhost |    -     | -         | HTTP Web Host for URL \* |
 | webhook |    -     | -         | Discord Webhook \*       |
+| comment |    -     | `true`    | Add a Comment to PRs     |
 | token   |    -     | -         | For use with a PAT       |
 
 **dest** - Remote destination directory that should be the root of your web server directory.
@@ -46,8 +47,6 @@ The full remote path will be {dest}/{owner}/{repo}/{run#}
 **webhost** - Web host where the `dest` is available at. The full URL will be {webhost}/{owner}/{repo}/{run#}
 
 **webhook** - A Discord Webhook URL that if provided will be posted to.
-
-**token** - Set this to an empty string to disable comments PR comments.
 
 For full details see: [src/main.sh](src/main.sh)
 
