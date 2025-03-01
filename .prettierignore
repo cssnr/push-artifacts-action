@@ -1,0 +1,11 @@
+# IDE
+.idea/
+.vscode/
+
+# Tools
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Files
+*.html

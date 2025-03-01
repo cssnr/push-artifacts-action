@@ -41,6 +41,7 @@ inputs:
   token:
     description: "GitHub Token"
     required: false
+    default: ${{ github.token }}
 
 runs:
   using: "docker"
