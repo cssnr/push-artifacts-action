@@ -82,9 +82,11 @@ if [ -n "${PR_NUMBER}" ] && [ "${INPUT_COMMENT}" == "true" ];then
             body=$(echo "${comment}" | jq -r '.body')
             if [[ ${body} == Screen\ Shots\ Link:* ]]; then
                 comment_id=$(echo "${comment}" | jq -r '.id')
-                comment_url="/repos/${OWNER}/${REPO}/issues/comments/${comment_id}"
+                comment_url="/repos/${OWNER}/${REPO}/pulls/comments/${comment_id}"
                 echo "Editing existing comment at: ${comment_url}"
-                gh api --method PATCH "${comment_url}" --body-file /tmp/body
+                gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "${comment_url}" -f "body=$(cat /tmp/body)"
+                #gh api --method PATCH "${comment_url}" f body="$(cat /tmp/body)"
+                #gh pr comment "${PR_NUMBER}" --body-file /tmp/body
                 commented="yes"
                 break
             fi
