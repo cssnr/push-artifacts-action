@@ -78,6 +78,7 @@ if [ -n "${PR_NUMBER}" ] && [ "${INPUT_COMMENT}" == "true" ];then
     declare commented
     gh pr view "${PR_NUMBER}" --json comments | jq -c '.comments[]' | while read -r comment; do
         login=$(echo "${comment}" | jq -r '.author.login')
+        echo "Checking comment by: ${login}"
         if [ "${login}" == "github-actions" ];then
             body=$(echo "${comment}" | jq -r '.body')
             if [[ ${body} == Screen\ Shots\ Link:* ]]; then
