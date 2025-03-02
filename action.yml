@@ -38,6 +38,10 @@ inputs:
   webhook:
     description: "Discord Webhook"
     required: false
+  comment:
+    description: "Add PR Comment"
+    required: false
+    default: "true"
   token:
     description: "GitHub Token"
     required: false

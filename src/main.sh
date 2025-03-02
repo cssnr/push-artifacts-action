@@ -14,6 +14,11 @@ echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
 echo "GITHUB_RUN_NUMBER: ${GITHUB_RUN_NUMBER}"
 echo "GITHUB_RUN_ATTEMPT: ${GITHUB_RUN_ATTEMPT}"
 
+REPO="${GITHUB_REPOSITORY#*/}"
+echo "REPO: ${REPO}"
+OWNER="${GITHUB_REPOSITORY_OWNER}"
+echo "OWNER: ${OWNER}"
+
 echo "---------- INPUTS ----------"
 
 [[ -n "${INPUT_PATH}" ]] && INPUT_SOURCE="${INPUT_PATH}"  # backwards compatibility
@@ -26,6 +31,7 @@ echo "INPUT_USER: ${INPUT_USER}"
 echo "INPUT_PORT: ${INPUT_PORT}"
 echo "INPUT_WEBHOST: ${INPUT_WEBHOST}"
 #echo "INPUT_WEBHOOK: ${INPUT_WEBHOOK}"  # hacked
+echo "INPUT_COMMENT: ${INPUT_COMMENT}"
 #echo "INPUT_TOKEN: ${INPUT_TOKEN}"  # hacked
 [[ -n ${INPUT_TOKEN} ]] && export GH_TOKEN="${INPUT_TOKEN}"
 
@@ -65,13 +71,37 @@ if [[ ${GITHUB_REF} =~ refs/pull/[0-9]+/merge ]]; then
     echo "PR_NUMBER: ${PR_NUMBER}"
 fi
 
-if [ -n "${PR_NUMBER}" ] && [ -n "${GH_TOKEN}" ];then
+if [ -n "${PR_NUMBER}" ] && [ "${INPUT_COMMENT}" == "true" ];then
     echo -e "\u001b[34;1mCommenting on PR: ${PR_NUMBER}"
     echo -e "Screen Shots Link: ${MD_URL}\n${MD_REFS}" > /tmp/body
     git config --global --add safe.directory "${GITHUB_WORKSPACE}"
-    gh pr comment "${PR_NUMBER}" --body-file /tmp/body
+    gh pr comment "${PR_NUMBER}" --edit-last --body-file /tmp/body ||
+        gh pr comment "${PR_NUMBER}" --body-file /tmp/body
+    #declare commented
+    #gh pr view "${PR_NUMBER}" --json comments | jq -c '.comments[]' | while read -r comment; do
+    #    login=$(echo "${comment}" | jq -r '.author.login')
+    #    echo "Checking comment by: ${login}"
+    #    if [ "${login}" == "github-actions" ];then
+    #        body=$(echo "${comment}" | jq -r '.body')
+    #        if [[ ${body} == Screen\ Shots\ Link:* ]]; then
+    #            comment_id=$(echo "${comment}" | jq -r '.id')
+    #            echo "Editing existing comment: ${comment_id}"
+    #            #comment_url="/repos/${OWNER}/${REPO}/pulls/comments/${comment_id}"
+    #            #echo "Editing existing comment at: ${comment_url}"
+    #            #gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "${comment_url}" -f "body=$(cat /tmp/body)"
+    #            #gh api --method PATCH "${comment_url}" f body="$(cat /tmp/body)"
+    #            gh pr comment "${PR_NUMBER}" --edit-last --body-file /tmp/body
+    #            commented="yes"
+    #            break
+    #        fi
+    #    fi
+    #done
+    #if [ "${commented}" != "yes" ];then
+    #    echo "Adding new comment."
+    #    gh pr comment "${PR_NUMBER}" --body-file /tmp/body
+    #fi
 else
-    echo -e "\u001b[33;1mSkipping PR comment because not PR or no token"
+    echo -e "\u001b[33mSkipping comment because not PR or comment: \u001b[0m${INPUT_COMMENT}"
 fi
 
 if [ -n "${INPUT_WEBHOOK}" ];then
