@@ -28,4 +28,5 @@ jobs:
       - name: "Prettier"
         if: ${{ always() }}
         run: |
+          npm install prettier
           npx prettier --check .
