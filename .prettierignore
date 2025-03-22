@@ -8,4 +8,5 @@
 .pytest_cache/
 
 # Files
+.github/pull_request_template.md
 *.html
