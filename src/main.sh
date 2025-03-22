@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
+# https://github.com/cssnr/push-artifacts-action
 
 set -eo pipefail
 
 SCRIPT_ID="<!-- cssnr/push-artifacts-action -->"
 
-echo "Running: ${0} as: $(whoami) in: $(pwd)"
+echo -e "::group::Starting Stack Deploy Action \u001b[36;1m${GITHUB_ACTION_REF}"
+echo "User: $(whoami)"
+echo "Script: ${0}"
+echo "Current Directory: $(pwd)"
+echo "Home Directory: ${HOME}"
+echo "Script Comment ID: ${SCRIPT_ID}"
+echo "::endgroup::"
 
-echo "---------- GITHUB ----------"
-
+echo "::group::GitHub Variables"
 echo "GITHUB_REF: ${GITHUB_REF}"
 echo "GITHUB_BASE_REF: ${GITHUB_BASE_REF}"
 echo "GITHUB_HEAD_REF: ${GITHUB_HEAD_REF}"
@@ -15,14 +21,13 @@ echo "GITHUB_REF_NAME: ${GITHUB_REF_NAME}"
 echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
 echo "GITHUB_RUN_NUMBER: ${GITHUB_RUN_NUMBER}"
 echo "GITHUB_RUN_ATTEMPT: ${GITHUB_RUN_ATTEMPT}"
-
 REPO="${GITHUB_REPOSITORY#*/}"
 echo "REPO: ${REPO}"
 OWNER="${GITHUB_REPOSITORY_OWNER}"
 echo "OWNER: ${OWNER}"
+echo "::endgroup::" # GitHub Variables
 
-echo "---------- INPUTS ----------"
-
+echo "::group::Action Inputs"
 [[ -n "${INPUT_PATH}" ]] && INPUT_SOURCE="${INPUT_PATH}"  # backwards compatibility
 echo "INPUT_SOURCE: ${INPUT_SOURCE}"
 [[ -n "${INPUT_BASE}" ]] && INPUT_DEST="${INPUT_BASE}"  # backwards compatibility
@@ -36,11 +41,10 @@ echo "INPUT_WEBHOST: ${INPUT_WEBHOST}"
 echo "INPUT_COMMENT: ${INPUT_COMMENT}"
 #echo "INPUT_TOKEN: ${INPUT_TOKEN}"  # hacked
 [[ -n ${INPUT_TOKEN} ]] && export GH_TOKEN="${INPUT_TOKEN}"
-
-echo "----------  SYNC  ----------"
+echo "::endgroup::" # Action Inputs
 
 REPO_RUN_PATH="${GITHUB_REPOSITORY}/${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}"
-echo "REPO_RUN_PATH: ${REPO_RUN_PATH}"
+echo -e "REPO_RUN_PATH: \u001b[36;1m${REPO_RUN_PATH}"
 
 echo "Moving INPUT_SOURCE: ${INPUT_SOURCE} to REPO_RUN_PATH: ${REPO_RUN_PATH}"
 mkdir -p "${GITHUB_REPOSITORY}"
@@ -49,15 +53,16 @@ mv "${INPUT_SOURCE}" "${REPO_RUN_PATH}"
 echo "Running: /src/generate.py"
 python /src/generate.py "${REPO_RUN_PATH}" "${GITHUB_REPOSITORY}"
 
-echo "Listing Source Directory: ${GITHUB_REPOSITORY_OWNER}"
+echo "::group::Directory: ${GITHUB_REPOSITORY_OWNER}"
 ls -lAhR "${GITHUB_REPOSITORY_OWNER}"
+echo "::endgroup::" # Directory
 
+echo "::group::Run: rsync"
 echo "rsync from: ${GITHUB_REPOSITORY_OWNER} to: ${INPUT_USER}@${INPUT_HOST}:${INPUT_DEST}"
 sshpass -p "${INPUT_PASS}" \
     rsync -aPvh -e "ssh -p ${INPUT_PORT} -o StrictHostKeyChecking=no" \
     "${GITHUB_REPOSITORY_OWNER}" "${INPUT_USER}@${INPUT_HOST}:${INPUT_DEST}"
-
-echo "----------  POST  ----------"
+echo "::endgroup::" # Run: rsync
 
 # TODO: Add cleanup to move INPUT_SOURCE back and delete index.html | so whack
 
@@ -91,21 +96,18 @@ if [[ -n "${PR_NUMBER}" && "${INPUT_COMMENT}" == "true" ]];then
     echo "::debug::comments_cmd: ${comments_cmd[*]}"
     declare COMMENT
     while read -r comment;do
-        echo "----------------------------------------"
-        echo "${comment}"
+        echo "::debug::comment: ${comment}"
         body=$(echo "${comment}" | jq -r '.body')
         if [[ "${body:0:36}" == "${SCRIPT_ID}" ]]; then
             COMMENT="${comment}"
             break
         fi
     done< <( "${comments_cmd[@]}" )
-    echo "----------------------------------------"
 
     if [[ -n "${COMMENT}" ]];then
         comment_id=$(echo "${comment}" | jq -r '.id')
         echo "EDIT - Existing Comment: ${comment_id}"
-        echo "original body: ${body}"
-        echo "url: /repos/${OWNER}/${REPO}/issues/comments/${comment_id}"
+        echo "::debug::original body: ${body}"
         gh api --method PATCH "/repos/${OWNER}/${REPO}/issues/comments/${comment_id}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
@@ -115,7 +117,7 @@ if [[ -n "${PR_NUMBER}" && "${INPUT_COMMENT}" == "true" ]];then
         gh pr comment "${PR_NUMBER}" --body-file /tmp/body
     fi
 else
-    echo -e "\u001b[33mSkipping comment because not PR or comment: \u001b[0m${INPUT_COMMENT}"
+    echo -e "\u001b[33;1mSkipping comment because not PR or comment: \u001b[0m${INPUT_COMMENT}"
 fi
 
 if [ -n "${INPUT_WEBHOOK}" ];then
@@ -138,4 +140,4 @@ else
     echo -e "\u001b[33;1mSkipping Webhook post because no webhook input"
 fi
 
-echo -e "\u001b[32;1mFinished Success."
+echo -e "✅ \u001b[32;1mFinished Success."

@@ -34,8 +34,6 @@ a notification to a Discord `webhook` or comment on the PR prepending the `webho
 > [!WARNING]  
 > This action and this GitHub repository will soon be renamed before `v1.0.0` is published.
 
-For more details see [action.yml](action.yml) and [src/main.sh](src/main.sh).
-
 ## Inputs
 
 | Input   |  Req.   | Default   | Input&nbsp;Description   |
@@ -51,14 +49,14 @@ For more details see [action.yml](action.yml) and [src/main.sh](src/main.sh).
 | comment |    -    | `true`    | Add a Comment to PRs     |
 | token   |    -    | -         | For use with a PAT       |
 
+For more details see [action.yml](action.yml) and [src/main.sh](src/main.sh).
+
 **dest** - Remote destination directory that should be the root of your web server directory.
 The full remote path will be {dest}/{owner}/{repo}/{run#}
 
 **webhost** - Web host where the `dest` is available at. The full URL will be {webhost}/{owner}/{repo}/{run#}
 
 **webhook** - A Discord Webhook URL that if provided will be posted to.
-
-For full details see: [src/main.sh](src/main.sh)
 
 ```yaml
 - name: 'Push Artifacts'
