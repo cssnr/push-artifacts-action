@@ -85,7 +85,7 @@ if [[ -n "${PR_NUMBER}" && "${INPUT_COMMENT}" == "true" ]];then
     echo -e "\u001b[34;1mCommenting on PR: ${PR_NUMBER}"
     git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
-    echo -e "Screen Shots Link: ${MD_URL}\n${MD_REFS}" > /tmp/body
+    echo -e "${SCRIPT_ID}\nScreen Shots Link: ${MD_URL}\n${MD_REFS}" > /tmp/body
 
     comments_cmd=(
         "gh" "api" "/repos/${OWNER}/${REPO}/issues/${PR_NUMBER}/comments"
