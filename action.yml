@@ -47,6 +47,10 @@ inputs:
     required: false
     default: ${{ github.token }}
 
+outputs:
+  url:
+    description: "Full Screen Shots URL"
+
 runs:
   using: "docker"
   image: "Dockerfile"
