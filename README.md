@@ -2,7 +2,6 @@
 [![GitHub Tag Minor](https://img.shields.io/github/v/tag/cssnr/push-artifacts-action?sort=semver&filter=!v*.*.*&logo=git&logoColor=white&labelColor=585858&label=%20)](https://github.com/cssnr/push-artifacts-action/releases)
 [![GitHub Release Version](https://img.shields.io/github/v/release/cssnr/push-artifacts-action?logo=git&logoColor=white&labelColor=585858&label=%20)](https://github.com/cssnr/push-artifacts-action/releases/latest)
 [![Workflow Release](https://img.shields.io/github/actions/workflow/status/cssnr/push-artifacts-action/release.yaml?logo=cachet&label=release)](https://github.com/cssnr/push-artifacts-action/actions/workflows/release.yaml)
-[![Workflow Test](https://img.shields.io/github/actions/workflow/status/cssnr/push-artifacts-action/test.yaml?logo=cachet&label=test)](https://github.com/cssnr/push-artifacts-action/actions/workflows/test.yaml)
 [![Workflow Lint](https://img.shields.io/github/actions/workflow/status/cssnr/push-artifacts-action/lint.yaml?logo=cachet&label=lint)](https://github.com/cssnr/push-artifacts-action/actions/workflows/lint.yaml)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/cssnr/push-artifacts-action?logo=github&label=updated)](https://github.com/cssnr/push-artifacts-action/pulse)
 [![Codeberg Last Commit](https://img.shields.io/gitea/last-commit/cssnr/push-artifacts-action/master?gitea_url=https%3A%2F%2Fcodeberg.org%2F&logo=codeberg&logoColor=white&label=updated)](https://codeberg.org/cssnr/push-artifacts-action)
