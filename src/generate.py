@@ -1,26 +1,28 @@
 import os
 import sys
-from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
 
-if __name__ == '__main__':
+from jinja2 import Environment, FileSystemLoader
+
+
+if __name__ == "__main__":
     if len(sys.argv) < 1 + 2:
-        print(f'Usage: {sys.argv[0]} [directory] [title]')
+        print(f"Usage: {sys.argv[0]} [directory] [title]")
         sys.exit(1)
 
-    print(f'title: {sys.argv[2]}')
+    print(f"title: {sys.argv[2]}")
     target_path = Path(sys.argv[1])
-    print(f'target_path: {target_path.resolve()}')
+    print(f"target_path: {target_path.resolve()}")
     files = os.listdir(target_path)
     files = sorted(files)
-    print(f'files: {files}')
+    print(f"files: {files}")
     data = {
-        'title': sys.argv[2],
-        'files': files,
+        "title": sys.argv[2],
+        "files": files,
     }
-    env = Environment(loader=FileSystemLoader('/src/templates'))
-    template = env.get_template('index.jinja2.html')
+    env = Environment(loader=FileSystemLoader("/src/templates"))  # nosec
+    template = env.get_template("index.jinja2.html")
     rendered = template.render(data)
-    with open(target_path / 'index.html', 'w', encoding='utf-8', newline='\n') as f:
+    with open(target_path / "index.html", "w", encoding="utf-8", newline="\n") as f:
         f.write(rendered)
-        print(f'Generated: {f.name}')
+        print(f"Generated: {f.name}")

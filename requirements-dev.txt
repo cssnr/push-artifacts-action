@@ -1,0 +1,10 @@
+bandit
+black
+flake8
+isort
+mypy
+PyGitHub
+pyyaml
+ruff
+yamllint
+types-PyYAML
