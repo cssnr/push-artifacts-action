@@ -37,27 +37,33 @@ a notification to a Discord `webhook` or comment on the PR prepending the `webho
 
 ## Inputs
 
-| Input   |  Req.   | Default   | Input&nbsp;Description   |
-| :------ | :-----: | :-------- | :----------------------- |
-| source  | **Yes** | -         | Source Directory         |
-| dest    |    -    | `/static` | Destination Directory \* |
-| host    | **Yes** | -         | RSYNC Host               |
-| user    | **Yes** | -         | RSYNC User               |
-| pass    | **Yes** | -         | RSYNC Pass               |
-| port    |    -    | `22`      | RSYNC Port               |
-| webhost |    -    | -         | HTTP Web Host for URL \* |
-| webhook |    -    | -         | Discord Webhook \*       |
-| comment |    -    | `true`    | Add a Comment to PRs     |
-| token   |    -    | -         | For use with a PAT       |
+| Input               | Default    | Input&nbsp;Description |
+| :------------------ | :--------- | :--------------------- |
+| source              | _Required_ | Source Directory       |
+| [dest](#dest)       | `/static`  | Destination Directory  |
+| host                | _Required_ | RSYNC Host             |
+| user                | _Required_ | RSYNC User             |
+| pass                | _Required_ | RSYNC Pass             |
+| port                | `22`       | RSYNC Port             |
+| [webhost](#webhost) | -          | HTTP Web Host for URL  |
+| [webhook](#webhook) | -          | Discord Webhook        |
+| comment             | `true`     | Add a Comment to PRs   |
+| token               | -          | For use with a PAT     |
 
 For more details see [action.yml](action.yml) and [src/main.sh](src/main.sh).
 
-**dest** - Remote destination directory that should be the root of your web server directory.
+#### dest
+
+Remote destination directory that should be the root of your web server directory.
 The full remote path will be {dest}/{owner}/{repo}/{run#}
 
-**webhost** - Web host where the `dest` is available at. The full URL will be {webhost}/{owner}/{repo}/{run#}
+#### webhost
 
-**webhook** - A Discord Webhook URL that if provided will be posted to.
+Web host where the `dest` is available at. The full URL will be {webhost}/{owner}/{repo}/{run#}
+
+#### webhook
+
+A Discord Webhook URL that if provided will be posted to.
 
 ```yaml
 - name: 'Push Artifacts'
